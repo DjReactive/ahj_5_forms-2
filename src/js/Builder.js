@@ -10,7 +10,7 @@ export default class Builder {
     this.button = document.getElementById('add-item');
     this.table = document.getElementById('table');
 
-    //this.tableRows = this.table.querySelector('tr');
+    // this.tableRows = this.table.querySelector('tr');
   }
 
   init() {
@@ -23,14 +23,14 @@ export default class Builder {
   update() {
     this.clearId();
     const tds = this.table.querySelectorAll('tr.item');
-    Array.from(tds).forEach(td => td.remove());
+    Array.from(tds).forEach((td) => td.remove());
     if (this.items.length < 1) {
       this.tableAddItem({
         information: true,
-        name: 'Никаких товаров пока не добавлено'
+        name: 'Никаких товаров пока не добавлено',
       }, true);
     } else {
-      this.items.forEach(item => this.tableAddItem(item, true));
+      this.items.forEach((item) => this.tableAddItem(item, true));
     }
   }
 
@@ -39,8 +39,8 @@ export default class Builder {
     const itemId = this.generateId();
     tr.setAttribute('id', `item-id-${itemId}`);
     tr.setAttribute('class', 'item');
-    tr.innerHTML = `<td ${(itemObj.information) ?
-      'colspan=3 id="no-items"' : ''}>${itemObj.name}</td>`;
+    tr.innerHTML = `<td ${(itemObj.information)
+      ? 'colspan=3 id="no-items"' : ''}>${itemObj.name}</td>`;
 
     if (!itemObj.information) {
       tr.innerHTML += `
@@ -64,7 +64,6 @@ export default class Builder {
   }
 
   tableEditItem(id) {
-    const item = this.getItem(id);
     this.createPopup(id);
   }
 
@@ -82,7 +81,7 @@ export default class Builder {
   }
 
   generateId() {
-    this.counter +=1;
+    this.counter += 1;
     return this.counter;
   }
 
@@ -91,10 +90,10 @@ export default class Builder {
   }
 
   getItem(id, action = '', obj = null) {
-    const item = document.getElementById(`item-id-${id}`);
-    if (!item) return null;
+    const itemEl = document.getElementById(`item-id-${id}`);
+    if (!itemEl) return null;
 
-    const tds = item.querySelector(`td`);
+    const tds = itemEl.querySelector('td');
     for (let item, i = 0; i < this.items.length; i++) {
       item = this.items[i];
       if (item.name === tds.textContent) {
@@ -123,12 +122,12 @@ export default class Builder {
     const html = `
     <div class="label">
       <span>Название</span>
-      <input id="name" type="text" value="${ (itemId) ? item.name : '' }">
+      <input id="name" type="text" value="${(itemId) ? item.name : ''}">
       <span id="name-error" class="error"></span>
     </div>
     <div class="label">
       <span>Стоиомость</span>
-      <input id="price" type="text" value="${ (itemId) ? item.price : '' }">
+      <input id="price" type="text" value="${(itemId) ? item.price : ''}">
       <span id="price-error" class="error"></span>
     </div>`;
 
@@ -192,29 +191,29 @@ export default class Builder {
 
     let response = Validator.validateString(this.items, name);
     if (response.error) {
-      this.setErrorMessage(errSpanName, response.message);
+      Builder.setErrorMessage(errSpanName, response.message);
       validate = false;
-    } else this.setErrorMessage(errSpanName, '');
+    } else Builder.setErrorMessage(errSpanName, '');
 
     response = Validator.validateNumber(value);
     if (response.error) {
-      this.setErrorMessage(errSpanPrice, response.message);
+      Builder.setErrorMessage(errSpanPrice, response.message);
       validate = false;
-    } else this.setErrorMessage(errSpanPrice, '');
+    } else Builder.setErrorMessage(errSpanPrice, '');
 
     return validate;
   }
 
-  setErrorMessage(input, message) {
+  static setErrorMessage(input, message) {
     input.textContent = message;
   }
 
   // Центрирует элемент popover относительно target
   horCenterOnTarget(el) {
     const { top, left } = this.widjet.getBoundingClientRect();
-    el.style.left = `${window.scrollX + left +
-      (Math.abs(el.offsetWidth - this.widjet.offsetWidth) / 2)}px`;
-    el.style.top = `${window.scrollY + top +
-      (Math.abs(el.offsetHeight - this.widjet.offsetHeight) / 2)}px`;
+    el.style.left = `${window.scrollX + left
+      + (Math.abs(el.offsetWidth - this.widjet.offsetWidth) / 2)}px`;
+    el.style.top = `${window.scrollY + top
+      + (Math.abs(el.offsetHeight - this.widjet.offsetHeight) / 2)}px`;
   }
 }

@@ -1,10 +1,11 @@
 import puppeteer from 'puppeteer';
+
 jest.setTimeout(30000);
 describe('INN/ORGN from', () => {
   let browser = null;
   let page = null;
   const baseUrl = 'http://localhost:8888';
-  beforeAll(async() => {
+  beforeAll(async () => {
     browser = await puppeteer.launch({
       headless: false,
       slowMo: 50,
@@ -12,8 +13,8 @@ describe('INN/ORGN from', () => {
     });
     page = await browser.newPage();
   });
-  afterAll(async ()=> {
-   await browser.close();
+  afterAll(async () => {
+    await browser.close();
   });
 
   test('Add Item', async () => {
@@ -21,12 +22,12 @@ describe('INN/ORGN from', () => {
     const widjet = await page.$('.widjet');
     const buttonAdd = await widjet.$('.button');
     await buttonAdd.click();
-    let popup = await page.waitForSelector('.popup');
-    let inputName = await page.$('#name');
-    let inputPrice = await page.$('#price');
-    await inputName.type(`Test Item 1`);
+    const popup = await page.waitForSelector('.popup');
+    const inputName = await page.$('#name');
+    const inputPrice = await page.$('#price');
+    await inputName.type('Test Item 1');
     await inputPrice.type(String(1235));
-    let saveBut = await popup.$('[data-action=save]');
+    const saveBut = await popup.$('[data-action=save]');
     await saveBut.click();
   });
 
@@ -34,12 +35,12 @@ describe('INN/ORGN from', () => {
     const widjet = await page.$('.widjet');
     const buttonEdit = await widjet.$('#edit-id-1');
     await buttonEdit.click();
-    let popup = await page.waitForSelector('.popup');
-    let inputName = await page.$('#name');
-    let inputPrice = await page.$('#price');
-    await inputName.type(`(edited)`);
+    const popup = await page.waitForSelector('.popup');
+    const inputName = await page.$('#name');
+    const inputPrice = await page.$('#price');
+    await inputName.type('(edited)');
     await inputPrice.type('12000');
-    let saveBut = await popup.$('[data-action=save]');
+    const saveBut = await popup.$('[data-action=save]');
     await saveBut.click();
   });
 

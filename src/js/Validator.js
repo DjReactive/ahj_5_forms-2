@@ -3,8 +3,7 @@ export default class Validator {
     if (name.length < 3) return Validator.error('Слишком короткое название');
     if (name.length > 24) return Validator.error('Слишком длинное название');
     for (let i = 0; i < array.length; i++) {
-      if (array[i].name === name)
-        return Validator.error('Такое название уже существует');
+      if (array[i].name === name) { return Validator.error('Такое название уже существует'); }
     }
     return Validator.error();
   }
@@ -19,12 +18,14 @@ export default class Validator {
   }
 
   static error(message = '') {
-    if (message.length > 0) return {
-      error: true,
-      message,
+    if (message.length > 0) {
+      return {
+        error: true,
+        message,
+      };
     }
     return {
       error: false,
-    }
+    };
   }
 }

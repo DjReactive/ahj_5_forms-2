@@ -1,0 +1,65 @@
+body {
+  font-family: Arial;
+}
+.widjet {
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #333;
+}
+.button {
+  font-size: 18px;
+  border-style: none;
+  border-radius: 3px;
+  background-color: #E52B50;
+  color: white;
+  padding: 3px 8px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #C8193C;
+}
+.top {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.top span {
+  text-align: center;
+}
+.main, .table-items {
+  width: 100%;
+}
+.table-items td {
+  padding: 5px;
+}
+.table-items tr.item {
+  background-color: #eee;
+}
+.popup {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+  background: #eee;
+  color: #444;
+}
+.popup div {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.error {
+  color: red;
+}
